@@ -33,11 +33,11 @@ describe("ModuleValidator", () => {
             const result = await validator.data({
                 name: "module1",
                 link: "https://example.com",
-                tag1: "toolong",
+                tag1: "toolongtag",
                 tag2: "tech",
                 tag3: "dev",
             });
-            expect(result).toBe("Un tag peut contenir 5 caractères maximum.");
+            expect(result).toBe("Un tag peut contenir 7 caractères maximum.");
         });
 
         it("Doit retourner si le nom est déjà pris", async () => {
@@ -64,7 +64,7 @@ describe("ModuleValidator", () => {
                 tag2: "dev",
                 tag3: "js",
             });
-            expect(result).toBe("Le lien n'est pas au bon format.");
+            expect(result).toBe(`L’URL doit commencer par "https://".`);
         });
 
         it("Doit retourner si le domaine est blacklisté", async () => {
@@ -76,10 +76,10 @@ describe("ModuleValidator", () => {
                 tag2: "dev",
                 tag3: "js",
             });
-            expect(result).toBe("Le nom de domaine n'est pas autorisé.");
+            expect(result).toBe("Le lien n'est pas autorisé.");
         });
 
-        it("Doit retourner si l'extension n'est pas whitelistée", async () => {
+        it("Doit retourner si l'URL n'est pas accessible", async () => {
             (Module.findOne as jest.Mock).mockResolvedValue(null); // #findName
             const result = await validator.data({
                 name: "module1",
@@ -88,7 +88,7 @@ describe("ModuleValidator", () => {
                 tag2: "dev",
                 tag3: "js",
             });
-            expect(result).toBe("Cette extension n'est pas accepter.");
+            expect(result).toBe("L’URL n’est pas accessible.");
         });
 
         it("Doit retourner undefined si tout est valide", async () => {
