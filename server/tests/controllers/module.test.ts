@@ -295,11 +295,11 @@ describe("ModuleController", () => {
     });
 
     describe("toggleReport", () => {
-        it("Doit ajouter un report et cacher si nécessaire", async () => {
+        // Le code n'ajoute que le signalement : le masquage automatique du module après plusieurs signalements,
+        // que ce test vérifiait avant, n'existe plus dans le contrôleur.
+        it("Doit ajouter un report", async () => {
             (Reported.findOne as jest.Mock).mockResolvedValue(null);
             (Reported.create as jest.Mock).mockResolvedValue({});
-            (Reported.count as jest.Mock).mockResolvedValue(6);
-            (Module.update as jest.Mock).mockResolvedValue([1]);
 
             await controller.toggleReport("user1", "module1");
 
@@ -310,13 +310,6 @@ describe("ModuleController", () => {
                 UserId: "user1",
                 ModuleId: "module1",
             });
-            expect(Reported.count).toHaveBeenCalledWith({
-                where: { ModuleId: "module1" },
-            });
-            expect(Module.update).toHaveBeenCalledWith(
-                { isShow: false },
-                { where: { id: "module1" } }
-            );
         });
     });
 
