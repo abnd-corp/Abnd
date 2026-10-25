@@ -56,5 +56,10 @@
         "uuid": "^11.0.3",
         "winston": "^3.17.0",
         "yamljs": "^0.3.0"
+    },
+    "overrides": {
+        "sequelize": {
+            "uuid": "^11.1.1"
+        }
     }
 }
