@@ -8,7 +8,7 @@
         "test": "cross-env NODE_ENV=test jest"
     },
     "author": "Rudy",
-    "license": "ISC",
+    "license": "AGPL-3.0-or-later",
     "description": "",
     "devDependencies": {
         "@types/bcryptjs": "^2.4.6",
