@@ -53,9 +53,6 @@ jobs:
     name: Serveur · tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    # 7 tests échouent déjà sur dev (voir l'issue de cette CI). Le job reste informatif tant qu'ils ne sont pas corrigés :
-    # retirer cette ligne ensuite, pour que les tests fassent échouer la CI.
-    continue-on-error: true
     defaults:
       run:
         working-directory: server
